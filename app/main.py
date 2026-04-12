@@ -1,30 +1,35 @@
 import asyncio
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+from pathlib import Path
 
-from app import state
-from app.csv_writer import init_csv
-from app.websocket_client import listen_binance
+from app.producer import start_producer
+from app.websocket_api import ws_endpoint
+from app.consumer import consume
 
 app = FastAPI()
 
 
 @app.get("/")
-def home():
-    return {"message": "Binance Stream API Running"}
+def dashboard():
+    return HTMLResponse(Path("templates/index.html").read_text())
 
 
 @app.get("/start")
-async def start_stream():
-    if not state.running:
-        state.running = True
-        init_csv()
-        asyncio.create_task(listen_binance())
-        return {"message": "Streaming started"}
-    return {"message": "Already running"}
+async def start():
+    asyncio.create_task(start_producer())
+    consume.delay()  # start celery task
+    return {"message": "Started pipeline"}
+
+
+app.websocket("/ws")(ws_endpoint)
 
 
 
-@app.get("/stop")
-async def stop_stream():
-    state.running = False
-    return {"message": "Streaming stopped"}
+from app.consumer import consume
+
+@app.get("/start")
+async def start():
+    asyncio.create_task(start_producer())
+    consume.delay()   # 👈 THIS IS CRITICAL
+    return {"message": "Started"}
