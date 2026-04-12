@@ -23,6 +23,7 @@ async def start_stream():
     return {"message": "Already running"}
 
 
+
 @app.get("/stop")
 async def stop_stream():
     state.running = False
