@@ -1,21 +1,21 @@
-# 🚀 Binance Real-Time Data Streamer (FastAPI + WebSocket)
+# Binance Real-Time Data Streamer (FastAPI + WebSocket)
 
 This project streams real-time cryptocurrency trade data from Binance using WebSockets and stores it into a CSV file using FastAPI.
 
 ---
 
-## 📌 Features
+##  Features
 
-* 🔴 Real-time data streaming from Binance
-* ⚡ Async WebSocket handling
-* 📁 CSV storage for persistence
-* 🎯 FastAPI endpoints to control streaming (Start/Stop)
-* 🔁 Auto-reconnect on failure
-* 🧱 Clean modular architecture
+* Real-time data streaming from Binance
+* Async WebSocket handling
+* CSV storage for persistence
+* FastAPI endpoints to control streaming (Start/Stop)
+* Auto-reconnect on failure
+* Clean modular architecture
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 binance_streamer/
@@ -37,16 +37,16 @@ binance_streamer/
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
-### 1️⃣ Clone the repository
+### 1️ Clone the repository
 
 ```
 git clone <your-repo-url>
 cd binance_streamer
 ```
 
-### 2️⃣ Create virtual environment (recommended)
+### 2 Create virtual environment (recommended)
 
 ```
 python -m venv venv
@@ -54,7 +54,7 @@ source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 ```
 
-### 3️⃣ Install dependencies
+### 3 Install dependencies
 
 ```
 pip install -r requirements.txt
@@ -62,7 +62,7 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Running the Application
+##  Running the Application
 
 Start FastAPI server:
 
@@ -72,9 +72,9 @@ uvicorn app.main:app --reload
 
 ---
 
-## 🌐 API Endpoints
+##  API Endpoints
 
-### ✅ Start Streaming
+###  Start Streaming
 
 ```
 GET /start
@@ -84,7 +84,7 @@ Starts Binance WebSocket streaming and begins writing data to CSV.
 
 ---
 
-### 🛑 Stop Streaming
+###  Stop Streaming
 
 ```
 GET /stop
@@ -94,7 +94,7 @@ Stops the streaming process.
 
 ---
 
-### 🏠 Health Check
+###  Health Check
 
 ```
 GET /
@@ -104,7 +104,7 @@ Returns API status.
 
 ---
 
-## 📊 Sample Output (CSV)
+##  Sample Output (CSV)
 
 ```
 event_time,symbol,price,quantity,trade_time
@@ -113,7 +113,7 @@ event_time,symbol,price,quantity,trade_time
 
 ---
 
-## 🔧 Configuration
+##  Configuration
 
 Edit `app/config.py`:
 
@@ -129,17 +129,17 @@ You can change:
 
 ---
 
-## ⚡ Future Improvements
+##  Future Improvements
 
-* 🔥 Support multiple trading pairs
-* 📦 Add Redis queue for buffering
-* 🗄️ Store data in MongoDB / PostgreSQL
-* 📈 Build real-time dashboard (WebSocket broadcast)
-* 🧠 Add data aggregation (candlesticks, OHLC)
+*  Support multiple trading pairs
+*  Add Redis queue for buffering
+*  Store data in MongoDB / PostgreSQL
+*  Build real-time dashboard (WebSocket broadcast)
+*  Add data aggregation (candlesticks, OHLC)
 
 ---
 
-## 🧠 Architecture Overview
+##  Architecture Overview
 
 ```
 Binance WebSocket
@@ -155,7 +155,7 @@ FastAPI acts as a control layer to start/stop streaming.
 
 ---
 
-## ⚠️ Notes
+##  Notes
 
 * CSV writing is synchronous (can be optimized using queue)
 * Ensure stable internet for uninterrupted streaming
@@ -163,16 +163,12 @@ FastAPI acts as a control layer to start/stop streaming.
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Anil Yadav**
 Python Developer | Backend Engineer
 
 ---
 
-## ⭐ If you like this project
 
-Give it a ⭐ on GitHub and share!
-
----
 
