@@ -17,7 +17,6 @@ async def listen_binance():
                 while state.running:
                     message = await websocket.recv()
                     data = json.loads(message)
-                    print("📈 Received:", data)
 
                     row = [
                         datetime.fromtimestamp(data["E"] / 1000),
