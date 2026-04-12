@@ -61,6 +61,8 @@ pip install -r requirements.txt
 ```
 
 ---
+## Swagger UI Fastapi:
+<img width="1687" height="815" alt="image" src="https://github.com/user-attachments/assets/3de0ab39-1543-4ff5-98db-a97e259d3e96" />
 
 ##  Running the Application
 
