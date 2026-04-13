@@ -19,8 +19,8 @@ try:
     
     result = collection.insert_one(test_data)
     
-    print("✅ Connected to MongoDB")
+    print("Connected to MongoDB")
     print("Inserted ID:", result.inserted_id)
 
 except Exception as e:
-    print("❌ Connection failed:", e)
+    print("Connection failed:", e)

@@ -6,7 +6,7 @@ import json
 #r = redis.Redis(host="localhost", port=6379, decode_responses=True)
 
 r = redis.Redis(
-    host="localhost",   # 👈 YOUR WSL IP
+    host="localhost",   # YOUR WSL IP
     port=6379,
     decode_responses=True
 )

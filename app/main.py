@@ -2,34 +2,40 @@ import asyncio
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from pathlib import Path
-
+from app import state
 from app.producer import start_producer
-from app.websocket_api import ws_endpoint
 from app.consumer import consume
 
 app = FastAPI()
 
 
-@app.get("/")
-def dashboard():
-    return HTMLResponse(Path("templates/index.html").read_text())
-
-
-@app.get("/start")
-async def start():
-    asyncio.create_task(start_producer())
-    consume.delay()  # start celery task
-    return {"message": "Started pipeline"}
-
-
-app.websocket("/ws")(ws_endpoint)
-
 
 
 from app.consumer import consume
 
+
+
+async def run_consumer_loop():
+    print("Consumer loop started")
+
+    while state.running:   
+        consume.delay()
+        await asyncio.sleep(1)
+
+    print("Consumer loop stopped")
+
 @app.get("/start")
 async def start():
-    asyncio.create_task(start_producer())
-    consume.delay()   # 👈 THIS IS CRITICAL
-    return {"message": "Started"}
+    if not state.running:
+        state.running = True
+        asyncio.create_task(start_producer())
+        asyncio.create_task(run_consumer_loop())   #  important
+        return {"message": "Started"}
+    return {"message": "Already running"}
+
+
+@app.get("/stop")
+async def stop():
+    state.running = False
+    print("Pipeline stopped")
+    return {"message": "Stopped"}
